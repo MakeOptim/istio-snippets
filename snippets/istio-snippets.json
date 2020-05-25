@@ -40,6 +40,31 @@
 			"        subset: $2"
 		]
 	},
+    "VirtualService-Canary": {
+        "scope": "yml, yaml",
+        "prefix": "VirtualService-Canary",
+        "description": "Canary Deployments using Istio",
+        "body": [
+            "# See more at https://istio.io/blog/2017/0.1-canary/",
+            "apiVersion: networking.istio.io/v1alpha3",
+            "kind: VirtualService",
+            "metadata:",
+            "  name: $1",
+            "spec:",
+            "  hosts:",
+            "  - $1",
+            "  http:",
+            "  - route:",
+            "    - destination:",
+            "        host: $1",
+            "        subset: ${2:v}-$3",
+            "      weight: ${4:90}",
+            "    - destination:",
+            "        host: $1",
+            "        subset: ${2:v}-$5",
+            "      weight: ${6:10}"
+        ]
+    },
 	"ServiceEntry" :{
         "scope": "yml, yaml",
         "prefix": "ServiceEntry",
