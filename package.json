@@ -1,0 +1,20 @@
+{
+    "name": "istio-snippets",
+    "displayName": "istio-snippets",
+    "description": "Code snippets of istio for visual studio code.",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.45.0"
+    },
+    "categories": [
+        "Snippets"
+    ],
+    "contributes": {
+        "snippets": [
+            {
+                "language": "yaml",
+                "path": "./snippets/istio-snippets.json"
+            }
+        ]
+    }
+}
