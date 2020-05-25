@@ -2,12 +2,29 @@
     "name": "istio-snippets",
     "displayName": "istio-snippets",
     "description": "Code snippets of istio for visual studio code.",
+    "publisher": "MakeOptim",
+    "author": "CatchZeng",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/MakeOptim/istio-snippets.git"
+    },
+    "icon": "images/icon.png",
+    "license": "MIT",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.45.0"
     },
     "categories": [
         "Snippets"
+    ],
+    "keywords": [
+        "istio",
+        "service mesh",
+        "kubernetes",
+        "DestinationRule",
+        "VirtualService",
+        "ServiceEntry",
+        "Gateway"
     ],
     "contributes": {
         "snippets": [

@@ -19,16 +19,16 @@ Enter the CRD name in the yaml file and the corresponding code snippets will app
 
 ### DestinationRule
 
-![DestinationRule](./images/DestinationRule.gif)
+![DestinationRule](https://raw.githubusercontent.com/MakeOptim/istio-snippets/master/images/DestinationRule.gif)
 
 ### VirtualService
 
-![VirtualService](./images/VirtualService.gif)
+![VirtualService](https://raw.githubusercontent.com/MakeOptim/istio-snippets/master/images/VirtualService.gif)
 
 ### ServiceEntry
 
-![ServiceEntry](./images/ServiceEntry.gif)
+![ServiceEntry](https://raw.githubusercontent.com/MakeOptim/istio-snippets/master/images/ServiceEntry.gif)
 
 ### Gateway
 
-![Gateway](./images/Gateway.gif)
+![Gateway](https://raw.githubusercontent.com/MakeOptim/istio-snippets/master/images/Gateway.gif)
