@@ -19,6 +19,32 @@
 			"    labels:",
 			"      ${2:version}: ${4:v2}"
 		]
+    },
+    "DestinationRule-Circuit-Breaking" :{
+        "scope": "yml, yaml",
+        "prefix": "DestinationRule-Circuit-Breaking",
+        "description": "Circuit Breaking DestinationRule",
+		"body": [
+			"# See more at https://istio.io/docs/tasks/traffic-management/circuit-breaking/",
+            "apiVersion: networking.istio.io/v1alpha3",
+            "kind: DestinationRule",
+            "metadata:",
+            "  name: $1",
+            "spec:",
+            "  host: $1",
+            "  trafficPolicy:",
+            "    connectionPool:",
+            "      tcp:",
+            "        maxConnections: ${2:1}",
+            "      http:",
+            "        http1MaxPendingRequests: ${3:1}",
+            "        maxRequestsPerConnection: ${4:1}",
+            "    outlierDetection:",
+            "      consecutiveErrors: ${5:1}",
+            "      interval: ${6:1s}",
+            "      baseEjectionTime: ${7:3m}",
+            "      maxEjectionPercent: ${8:100}"
+		]
 	},
 	"VirtualService" :{
         "scope": "yml, yaml",
