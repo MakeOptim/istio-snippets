@@ -2,7 +2,7 @@
     "DestinationRule" :{
         "scope": "yml, yaml",
         "prefix": "DestinationRule",
-        "description": "Istio DestinationRule template",
+        "description": "Simple DestinationRule",
 		"body": [
 			"# See more at https://istio.io/docs/reference/config/networking/destination-rule/",
 			"apiVersion: networking.istio.io/v1alpha3",
@@ -23,7 +23,7 @@
 	"VirtualService" :{
         "scope": "yml, yaml",
         "prefix": "VirtualService",
-        "description": "Istio VirtualService template",
+        "description": "Simple VirtualService",
 		"body": [
 			"# See more at https://istio.io/docs/reference/config/networking/virtual-service/",
 			"apiVersion: networking.istio.io/v1alpha3",
@@ -43,7 +43,7 @@
     "VirtualService-Canary": {
         "scope": "yml, yaml",
         "prefix": "VirtualService-Canary",
-        "description": "Canary Deployments using Istio",
+        "description": "Canary Deployments VirtualService",
         "body": [
             "# See more at https://istio.io/blog/2017/0.1-canary/",
             "apiVersion: networking.istio.io/v1alpha3",
@@ -64,11 +64,36 @@
             "        subset: ${2:v}-$5",
             "      weight: ${6:10}"
         ]
+	},
+    "VirtualService-Mirroring": {
+        "scope": "yml, yaml",
+        "prefix": "VirtualService-Mirroring",
+        "description": "Mirroring Traffic VirtualService",
+        "body": [
+            "# See more info at https://istio.io/docs/tasks/traffic-management/mirroring/",
+            "apiVersion: networking.istio.io/v1alpha3",
+            "kind: VirtualService",
+            "metadata:",
+            "  name: $1",
+            "spec:",
+            "  hosts:",
+            "  - $1",
+            "  http:",
+            "  - route:",
+            "    - destination:",
+            "        host: $1",
+			"        subset: ${3:v}-$4",
+			"      weight: ${6:100}",
+            "    mirror:",
+            "      host: $1",
+			"      subset: ${3:v}-$5",
+			"    mirror_percent: ${7:100}"
+        ]
     },
 	"ServiceEntry" :{
         "scope": "yml, yaml",
         "prefix": "ServiceEntry",
-        "description": "Istio ServiceEntry template",
+        "description": "Simple ServiceEntry",
 		"body": [
 			"# See more at https://istio.io/docs/reference/config/networking/service-entry/",
 			"apiVersion: networking.istio.io/v1alpha3",
@@ -90,7 +115,7 @@
 	"Gateway" :{
         "scope": "yml, yaml",
         "prefix": "Gateway",
-        "description": "Istio Gateway template",
+        "description": "Simple Gateway",
 		"body": [
 			"# See more at https://istio.io/docs/reference/config/networking/gateway/",
 			"apiVersion: networking.istio.io/v1alpha3",

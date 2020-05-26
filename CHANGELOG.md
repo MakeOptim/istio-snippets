@@ -5,7 +5,9 @@ All notable changes to the "istio-snippets" extension will be documented in this
 ## [0.0.2] - 2020-05-25
 
 ### Added
-- See more
+- See more comment
+- VirtualService-Canary: Canary Deployments VirtualService
+- VirtualService-Mirroring: Mirroring Traffic VirtualService
 
 ## [0.0.1] - 2020-05-25
 
