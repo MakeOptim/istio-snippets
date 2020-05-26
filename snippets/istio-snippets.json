@@ -12,12 +12,12 @@
 			"spec:",
 			"  host: $1",
 			"  subsets:",
-			"  - name: $2",
+			"  - name: ${3:v1}",
 			"    labels:",
-			"      ${3:version}: $2",
-			"  - name: $4",
+			"      ${2:version}: ${3:v1}",
+			"  - name: ${4:v2}",
 			"    labels:",
-			"      ${3:version}: $4"
+			"      ${2:version}: ${4:v2}"
 		]
 	},
 	"VirtualService" :{
@@ -37,7 +37,7 @@
 			"  - route:",
 			"    - destination:",
 			"        host: $1",
-			"        subset: $2"
+			"        subset: ${2:v1}"
 		]
 	},
     "VirtualService-Canary": {
@@ -57,12 +57,12 @@
             "  - route:",
             "    - destination:",
             "        host: $1",
-            "        subset: ${2:v}-$3",
-            "      weight: ${4:90}",
+            "        subset: ${2:v1}",
+            "      weight: ${3:90}",
             "    - destination:",
             "        host: $1",
-            "        subset: ${2:v}-$5",
-            "      weight: ${6:10}"
+            "        subset: ${4:v2}",
+            "      weight: ${5:10}"
         ]
 	},
     "VirtualService-Mirroring": {
@@ -70,7 +70,7 @@
         "prefix": "VirtualService-Mirroring",
         "description": "Mirroring Traffic VirtualService",
         "body": [
-            "# See more info at https://istio.io/docs/tasks/traffic-management/mirroring/",
+            "# See more at https://istio.io/docs/tasks/traffic-management/mirroring/",
             "apiVersion: networking.istio.io/v1alpha3",
             "kind: VirtualService",
             "metadata:",
@@ -82,12 +82,74 @@
             "  - route:",
             "    - destination:",
             "        host: $1",
-			"        subset: ${3:v}-$4",
-			"      weight: ${6:100}",
+			"        subset: ${2:v1}",
+			"      weight: ${3:100}",
             "    mirror:",
             "      host: $1",
-			"      subset: ${3:v}-$5",
-			"    mirror_percent: ${7:100}"
+			"      subset: ${4:v2}",
+			"    mirror_percent: ${5:100}"
+        ]
+	},
+    "VirtualService-Fault-Injection-HTTPStatus": {
+        "scope": "yml, yaml",
+        "prefix": "VirtualService-Fault-Injection-HTTPStatus",
+        "description": "Fault Injection (HTTPStatus) VirtualService",
+        "body": [
+		  "# See more at https://istio.io/docs/tasks/traffic-management/fault-injection/",
+          "apiVersion: networking.istio.io/v1alpha3",
+          "kind: VirtualService",
+          "metadata:",
+          "  name: $1",
+          "spec:",
+          "  hosts:",
+          "  - $1",
+          "  http:",
+          "  - fault:",
+          "      abort:",
+          "        httpStatus: ${2:500}",
+          "        percentage:",
+          "          value: ${3:100}",
+          "    route:",
+          "    - destination:",
+          "        host: $1",
+          "        subset: ${4:v1}",
+          "  - route:",
+          "    - destination:",
+          "        host: $1",
+          "        subset: ${4:v1}"
+        ]
+	},
+    "VirtualService-Fault-Injection-Delay": {
+        "scope": "yml, yaml",
+        "prefix": "VirtualService-Fault-Injection-Delay",
+        "description": "Fault Injection (Delay) VirtualService",
+        "body": [
+		  "# See more at https://istio.io/docs/tasks/traffic-management/fault-injection/",
+          "apiVersion: networking.istio.io/v1alpha3",
+          "kind: VirtualService",
+          "metadata:",
+          "  name: $1",
+          "spec:",
+          "  hosts:",
+          "  - $1",
+          "  http:",
+          "  - fault:",
+          "      delay:",
+          "        fixedDelay: ${2:7s}",
+          "        percentage:",
+		  "          value: ${3:100}",
+		  "    match:",
+		  "    - headers:",
+		  "        end-user:",
+		  "          exact: ${4:jason}",
+          "    route:",
+          "    - destination:",
+          "        host: $1",
+          "        subset: ${5:v1}",
+          "  - route:",
+          "    - destination:",
+          "        host: $1",
+          "        subset: ${5:v1}"
         ]
     },
 	"ServiceEntry" :{
